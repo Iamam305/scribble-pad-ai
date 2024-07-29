@@ -40,3 +40,24 @@ post_app.post("/linkedin", async (c) => {
     return c.json({ error: "Somethings went wrong" }, 500);
   }
 });
+
+post_app.get("/", async (c) => {
+  try {
+    const user = c.get("user");
+    const limit = 10;
+    const page = c.req.query("page") || 1;
+    const post_type = c.req.query("post_type");
+
+    const query_fileter = post_type
+      ? { type: post_type, author: user._id }
+      : { author: user._id };
+    const posts = await POST.find(query_fileter)
+      .skip((+page - 1) * limit)
+      .limit(Number(limit));
+
+    return c.json({ posts });
+  } catch (error) {
+    console.log(error);
+    return c.json({ error: "Somethings went wrong" }, 500);
+  }
+});
