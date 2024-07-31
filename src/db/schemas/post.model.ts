@@ -11,12 +11,11 @@ const post_schema = new mongoose.Schema(
       enum: ["linkedin-post", "blogpost", "twitter-thread"],
     },
     transcription_key: { type: String },
+    audio_file_key: { type: String },
   },
   {
     timestamps: true,
   }
 );
 
-export const POST =
- mongoose.models.Post || 
-mongoose.model("Post", post_schema);
+export const POST = mongoose.models.Post || mongoose.model("Post", post_schema);

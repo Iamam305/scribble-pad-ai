@@ -1,4 +1,5 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,7 +12,48 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from '@/components/ui/use-toast'
+import { axios_instance } from '@/configs/axios.config'
+import { redirect, useRouter } from 'next/navigation'
+
+type login_input = {
+  email: string
+  password: string
+}
 const Page = () => {
+  const [loading, setLoading] = useState(false)
+  const router = useRouter()
+  const { register, handleSubmit, watch, formState: { errors }, } = useForm<login_input>();
+  const onSubmit: SubmitHandler<login_input> = async data => {
+    try {
+      setLoading(true)
+      const res = await axios_instance.request({
+        method: "POST",
+        url: "api/auth/login",
+        data: {
+          email: data.email,
+          password: data.password
+        }
+      })
+
+      toast({
+        title: 'Login successful',
+
+      })
+
+      setLoading(false)
+      router.push("/app")
+
+    } catch (error: any) {
+      toast({
+        title: error.message,
+
+      })
+      setLoading(false)
+    }
+  };
+
   return (
     <div className='flex w-full min-h-screen items-center justify-center' >
 
@@ -22,19 +64,21 @@ const Page = () => {
             Enter your email below to login to your account.
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="m@example.com" required />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button className="w-full">Sign in</Button>
-        </CardFooter>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <CardContent className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="m@example.com" required {...register("email")} />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" required {...register("password")} />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button disabled={loading} type='submit' className="w-full">Sign in</Button>
+          </CardFooter>
+        </form>
       </Card>
     </div>
 

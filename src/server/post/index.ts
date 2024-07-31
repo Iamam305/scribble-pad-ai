@@ -32,6 +32,8 @@ post_app.post("/linkedin", async (c) => {
       body: post,
       title: "LinkedIn Post",
       type: "linkedin-post",
+      audio_file_key: audio_file_key,
+      transcription_key: transcription_key,
     }).save();
 
     return c.json({ post, new_post });

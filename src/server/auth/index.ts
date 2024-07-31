@@ -54,7 +54,7 @@ auth_app.post("/verify", async (c) => {
     if (!verification_code) {
       return c.json({ error: "Please fill the fields" }, { status: 400 });
     }
-    const user = await User.findOne({ verification_code });
+    const user = await User.findOne({ email, verification_code });
     if (!user) {
       return c.json({ error: "Invalid verification code" }, { status: 404 });
     }
