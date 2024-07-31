@@ -5,6 +5,7 @@ import { TextLoader } from "langchain/document_loaders/fs/text";
 import { download_file_from_s3 } from "./download-file-from-s3";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { linkedin_post_prompt } from "../prompts/linkedin-post-prompt";
+import { extract_string_between_tags } from "./extract-string-bw-tags";
 
 export const generate_linkedin_post = async (
   transcription_file_key: string
@@ -38,7 +39,7 @@ export const generate_linkedin_post = async (
     const result = await chain.invoke({
       transcription: merged_transcription,
     });
-
+    
     return [result.content as string, null];
   } catch (error) {
     return [null, error as Error];

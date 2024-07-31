@@ -76,12 +76,20 @@ const Page = () => {
                 toast({
                     title: 'Post Created',
                 })
+                setLoading(false)
+            }
+            else{
+                toast({
+                    title: 'Error creating post',
+                })
+                setLoading(false)
             }
         } catch (error) {
             console.log(error);
             toast({
                 title: 'Error creating post',
             })
+            setLoading(false)
         }
 
     };
@@ -137,7 +145,7 @@ const Page = () => {
 
 
                             <DialogFooter>
-                                <Button type="submit">Create</Button>
+                                <Button disabled={loading} type="submit">Create</Button>
                             </DialogFooter>
                         </form>
                     </Form>

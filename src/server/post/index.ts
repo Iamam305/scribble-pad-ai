@@ -1,4 +1,5 @@
 import { POST } from "@/db/schemas/post.model";
+import { extract_string_between_tags } from "@/lib/server/functions/extract-string-bw-tags";
 import { generate_linkedin_post } from "@/lib/server/functions/generate-linkedin-post";
 import { transcribe } from "@/lib/server/functions/transcribe";
 import { Hono } from "hono";
@@ -27,10 +28,19 @@ post_app.post("/linkedin", async (c) => {
       console.log(post_generation_error);
       return c.json({ error: post_generation_error }, 500);
     }
+console.log(post);
+
+    const title = extract_string_between_tags(post as string, "post_title");
+    const linkedin_post = extract_string_between_tags(
+      post as string,
+      "linkedin_post"
+    );
+    console.log(title, linkedin_post);
+    
     const new_post = await new POST({
       author: user._id,
-      body: post,
-      title: "LinkedIn Post",
+      body: linkedin_post,
+      title: title,
       type: "linkedin-post",
       audio_file_key: audio_file_key,
       transcription_key: transcription_key,
