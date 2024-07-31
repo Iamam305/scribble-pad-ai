@@ -12,11 +12,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from 'next/navigation'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { axios_instance } from '@/configs/axios.config'
+import { toast } from '@/components/ui/use-toast'
 
 type register_input = {
   name: string,
-
   email: string
   password: string
 }
@@ -24,10 +25,47 @@ const Page = () => {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
   const { register, handleSubmit, watch, formState: { errors }, } = useForm<register_input>();
+  const on_submit: SubmitHandler<register_input> = async data => {
+    try {
+      setLoading(true)
+      const res = await axios_instance.request({
+        method: "POST",
+        url: "api/auth/register",
+        data: {
+          name: data.name,
+          email: data.email,
+          password: data.password
+        }
+      })
+      if (res.status === 201 || res.status === 200) {
+
+        toast({
+          title: 'Login successful',
+
+        })
+        setLoading(false)
+        router.push("/verify?email=" + data.email)
+      }
+      else {
+        toast({
+          title: res.data.msg
+        })
+        setLoading(false)
+      }
+
+    } catch (error: any) {
+      toast({
+        title: error.msg,
+
+      })
+      setLoading(false)
+    }
+  };
+
   return (
     <div className='flex w-full min-h-screen items-center'>
 
-      <Card className="mx-auto max-w-sm">
+      <Card className="mx-auto max-w-sm w-full">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>
@@ -35,13 +73,13 @@ const Page = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="grid gap-4">
+          <form className="grid gap-4" onSubmit={handleSubmit(on_submit)}>
             <div className="grid  gap-2">
-              
-                <Label htmlFor="full-name">Full Name</Label>
-                <Input id="full-name" placeholder="Max" required />
-              
-             
+
+              <Label htmlFor="full-name" >Full Name</Label>
+              <Input id="full-name" placeholder="Max" required {...register("name")} />
+
+
             </div>
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
@@ -50,13 +88,14 @@ const Page = () => {
                 type="email"
                 placeholder="m@example.com"
                 required
+                {...register("email")}
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" />
+              <Label htmlFor="password" >Password</Label>
+              <Input id="password" type="password" {...register("password")} />
             </div>
-            <Button type="submit" className="w-full">
+            <Button disabled={loading} type="submit" className="w-full">
               Create an account
             </Button>
 

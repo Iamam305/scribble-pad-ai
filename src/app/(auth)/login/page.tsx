@@ -36,14 +36,24 @@ const Page = () => {
           password: data.password
         }
       })
+      if (res.status === 201 || res.status === 200) {
 
-      toast({
-        title: 'Login successful',
+        toast({
+          title: 'Login successful',
 
-      })
+        })
 
-      setLoading(false)
-      router.push("/app")
+        setLoading(false)
+        router.push("/app")
+      }
+      else {
+        toast({
+          title: res.data.msg
+        })
+        setLoading(false)
+      }
+
+
 
     } catch (error: any) {
       toast({
