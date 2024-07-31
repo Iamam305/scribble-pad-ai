@@ -42,6 +42,6 @@ Your task is to transform this transcription into a well-structured, engaging Li
    - Frame the content to encourage comments and discussions
    - Consider ending with a question to prompt interaction
 
-Write your LinkedIn post inside <linkedin_post> tags. Aim for a length of 150-250 words, which is optimal for LinkedIn engagement. Remember to maintain professionalism while capturing the essence of the original transcription.
+Write your LinkedIn post inside <linkedin_post> tags and title of the post inside <post_title> tags. Aim for a length of 150-250 words, which is optimal for LinkedIn engagement. Remember to maintain professionalism while capturing the essence of the original transcription.
 
 `);

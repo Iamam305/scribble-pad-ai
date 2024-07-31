@@ -16,7 +16,7 @@ import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 type create_post_input = {
-    audio: File,
+    audio: FileList,
     type: string
 }
 const Page = () => {
@@ -29,16 +29,60 @@ const Page = () => {
     }, [])
 
     const fetch_posts = async () => {
-        const res = await axios_instance.request({
-            method: "GET",
-            url: "api/v1/post/"
-        })
-        setPosts(res.data.posts)
-    }
+        try {
+            const response = await axios_instance.request({
+                method: "GET",
+                url: "api/v1/post/"
+            });
+
+            if (response.data && response.data.posts) {
+                setPosts(response.data.posts);
+            } else {
+                console.error("Invalid response from server:", response.data);
+            }
+        } catch (error) {
+            console.error("Failed to fetch posts:", error);
+        }
+    };
+
 
     const form = useForm<create_post_input>();
-    const on_submit: SubmitHandler<create_post_input> = async data => {
-        console.log(data);
+
+    const on_submit: SubmitHandler<create_post_input> = async (data) => {
+        try {
+            setLoading(true)
+
+            const formData = new FormData();
+            formData.append("audio", data.audio[0]);
+            const upload_res = await axios_instance.request({
+                method: "POST",
+                url: "api/v1/file-upload/",
+                data: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            })
+
+            const create_post_res = await axios_instance.request({
+                method: "POST",
+                url: `api/v1/post/${data.type}`,
+                data: {
+                    audio_file_key: upload_res.data.data.audio_file_key,
+                },
+
+            })
+
+            if (create_post_res.status === 201 || create_post_res.status === 200) {
+                toast({
+                    title: 'Post Created',
+                })
+            }
+        } catch (error) {
+            console.log(error);
+            toast({
+                title: 'Error creating post',
+            })
+        }
 
     };
 
@@ -78,7 +122,7 @@ const Page = () => {
                                             <SelectContent >
                                                 <SelectGroup>
                                                     <SelectLabel>Post Types</SelectLabel>
-                                                    <SelectItem value="linkedin-post">Linkedin Post</SelectItem>
+                                                    <SelectItem value="linkedin">Linkedin Post</SelectItem>
                                                     <SelectItem value="blogpost" disabled={true}>Blog Post (comming soon)</SelectItem>
                                                     <SelectItem value="twitter-thread" disabled={true}>Twitter Thread (comming soon)</SelectItem>
 
