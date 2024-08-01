@@ -122,7 +122,7 @@ const Page = () => {
                                 <form onSubmit={form.handleSubmit(on_submit)} className="grid gap-4 py-4">
                                     <div className="grid grid-cols-4 items-center gap-4">
                                         <Label htmlFor="audio_file" className="text-right">Audio File</Label>
-                                        <Input id="audio_file" type="file" className="col-span-3" {...form.register("audio")} />
+                                        <Input id="audio_file" type="file" className="col-span-3" {...form.register("audio")} required/>
                                     </div>
                                     <FormField
                                         control={form.control}
@@ -130,7 +130,7 @@ const Page = () => {
                                         render={({ field }) => (
                                             <FormItem className="grid grid-cols-4 items-center gap-4">
                                                 <FormLabel className="text-right">Post Type</FormLabel>
-                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value} required>
                                                     <FormControl>
 
                                                         <SelectTrigger className="col-span-3">
