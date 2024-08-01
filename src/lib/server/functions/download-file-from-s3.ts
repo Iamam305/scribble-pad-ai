@@ -9,6 +9,12 @@ export const download_file_from_s3 = async (
 ): Promise<[string | null, Error | string | null]> => {
   try {
     const temp_dir = path.join(os.tmpdir(), "downloads");
+    if (!fs.existsSync(temp_dir)) {
+      console.log("Creating download directory");
+      fs.mkdirSync(temp_dir);
+    }
+
+    console.log(`Temp directory: ${temp_dir}`);
 
     const tmp_file_path = path.join(
       temp_dir,
