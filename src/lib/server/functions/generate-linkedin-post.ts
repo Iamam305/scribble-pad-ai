@@ -39,7 +39,7 @@ export const generate_linkedin_post = async (
     const result = await chain.invoke({
       transcription: merged_transcription,
     });
-    
+
     return [result.content as string, null];
   } catch (error) {
     return [null, error as Error];

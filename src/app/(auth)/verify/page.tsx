@@ -1,8 +1,6 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -16,7 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { axios_instance } from '@/configs/axios.config'
 import { toast } from '@/components/ui/use-toast'
 const Page = () => {
@@ -25,7 +23,7 @@ const Page = () => {
     const searchParams = useSearchParams()
     const email = searchParams.get('email')
     console.log(email);
-    
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm<{ otp: string }>();
     const on_submit: SubmitHandler<{ otp: string }> = async (data) => {
         try {
@@ -86,7 +84,7 @@ const Page = () => {
 
                         </CardContent>
                         <CardFooter>
-                            <Button  disabled={loading} type='submit' className="w-full">Verify</Button>
+                            <Button disabled={loading} type='submit' className="w-full">Verify</Button>
                         </CardFooter>
                     </form>
 

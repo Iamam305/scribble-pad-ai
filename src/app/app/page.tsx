@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Progress } from '@/components/ui/progress'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from '@/components/ui/use-toast'
 import { axios_instance } from '@/configs/axios.config'
@@ -21,12 +22,13 @@ type create_post_input = {
 }
 const Page = () => {
     const [posts, setPosts] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [creation_status, setCreation_status] = useState("standby")
+    const [create_post_open, setCreate_post_open] = useState(false);
     console.log(posts);
 
     useEffect(() => {
         fetch_posts()
-    }, [])
+    }, [create_post_open])
 
     const fetch_posts = async () => {
         try {
@@ -50,7 +52,7 @@ const Page = () => {
 
     const on_submit: SubmitHandler<create_post_input> = async (data) => {
         try {
-            setLoading(true)
+            setCreation_status("Uploading")
 
             const formData = new FormData();
             formData.append("audio", data.audio[0]);
@@ -63,6 +65,7 @@ const Page = () => {
                 }
             })
 
+            setCreation_status("Creating Post")
             const create_post_res = await axios_instance.request({
                 method: "POST",
                 url: `api/v1/post/${data.type}`,
@@ -76,79 +79,96 @@ const Page = () => {
                 toast({
                     title: 'Post Created',
                 })
-                setLoading(false)
+                setCreation_status("standby")
+                setCreate_post_open(false)
             }
-            else{
+            else {
                 toast({
                     title: 'Error creating post',
                 })
-                setLoading(false)
+                setCreation_status("standby")
+                setCreate_post_open(false)
             }
         } catch (error) {
             console.log(error);
             toast({
                 title: 'Error creating post',
             })
-            setLoading(false)
+            setCreation_status("standby")
+            setCreate_post_open(false)
         }
 
     };
 
     return (
         <div className='w-full mx-4 md:mx-auto my-10 max-w-6xl flex flex-col items-end gap-6'>
-            <Dialog>
+            <Dialog open={creation_status === "standby" ? create_post_open : true} onOpenChange={setCreate_post_open}>
+
                 <DialogTrigger asChild>
                     <Button ><Plus size={16} strokeWidth={1.5} /> Add New</Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                        <DialogTitle>Create Post</DialogTitle>
-                        <DialogDescription>
-                            Upload audio file and select post type to create post.
-                        </DialogDescription>
-                    </DialogHeader>
-                    <Form {...form}>
 
-                        <form onSubmit={form.handleSubmit(on_submit)} className="grid gap-4 py-4">
-                            <div className="grid grid-cols-4 items-center gap-4">
-                                <Label htmlFor="audio_file" className="text-right">Audio File</Label>
-                                <Input id="audio_file" type="file" className="col-span-3" {...form.register("audio")} />
-                            </div>
-                            <FormField
-                                control={form.control}
-                                name="type"
-                                render={({ field }) => (
-                                    <FormItem className="grid grid-cols-4 items-center gap-4">
-                                        <FormLabel className="text-right">Post Type</FormLabel>
-                                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                            <FormControl>
+                    {creation_status === "standby" ? (
+                        <>
+                            <DialogHeader>
+                                <DialogTitle>Create Post</DialogTitle>
+                                <DialogDescription>
+                                    Upload audio file and select post type to create post.
+                                </DialogDescription>
+                            </DialogHeader>
+                            <Form {...form}>
 
-                                                <SelectTrigger className="col-span-3">
-                                                    <SelectValue placeholder="Select post type" />
-                                                </SelectTrigger>
-                                            </FormControl>
-                                            <SelectContent >
-                                                <SelectGroup>
-                                                    <SelectLabel>Post Types</SelectLabel>
-                                                    <SelectItem value="linkedin">Linkedin Post</SelectItem>
-                                                    <SelectItem value="blogpost" disabled={true}>Blog Post (comming soon)</SelectItem>
-                                                    <SelectItem value="twitter-thread" disabled={true}>Twitter Thread (comming soon)</SelectItem>
+                                <form onSubmit={form.handleSubmit(on_submit)} className="grid gap-4 py-4">
+                                    <div className="grid grid-cols-4 items-center gap-4">
+                                        <Label htmlFor="audio_file" className="text-right">Audio File</Label>
+                                        <Input id="audio_file" type="file" className="col-span-3" {...form.register("audio")} />
+                                    </div>
+                                    <FormField
+                                        control={form.control}
+                                        name="type"
+                                        render={({ field }) => (
+                                            <FormItem className="grid grid-cols-4 items-center gap-4">
+                                                <FormLabel className="text-right">Post Type</FormLabel>
+                                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                                    <FormControl>
 
-                                                </SelectGroup>
-                                            </SelectContent>
-                                        </Select>
+                                                        <SelectTrigger className="col-span-3">
+                                                            <SelectValue placeholder="Select post type" />
+                                                        </SelectTrigger>
+                                                    </FormControl>
+                                                    <SelectContent >
+                                                        <SelectGroup>
+                                                            <SelectLabel>Post Types</SelectLabel>
+                                                            <SelectItem value="linkedin">Linkedin Post</SelectItem>
+                                                            <SelectItem value="blogpost" disabled={true}>Blog Post (comming soon)</SelectItem>
+                                                            <SelectItem value="twitter-thread" disabled={true}>Twitter Thread (comming soon)</SelectItem>
 
-
-                                    </FormItem>
-                                )}
-                            />
+                                                        </SelectGroup>
+                                                    </SelectContent>
+                                                </Select>
 
 
-                            <DialogFooter>
-                                <Button disabled={loading} type="submit">Create</Button>
-                            </DialogFooter>
-                        </form>
-                    </Form>
+                                            </FormItem>
+                                        )}
+                                    />
+
+
+                                    <DialogFooter>
+                                        <Button disabled={creation_status !== "standby"} type="submit">Create</Button>
+                                    </DialogFooter>
+                                </form>
+                            </Form>
+                        </>
+                    ) : (
+                        <>
+                            <DialogHeader className='gap-2'>
+                                <DialogTitle className='text-center'>{creation_status}...</DialogTitle>
+                                <Progress value={creation_status === "Uploading" ? 50 : creation_status === "Creating Post" ? 70 : 100} className="w-full mx-auto" />
+                            </DialogHeader>
+                        </>
+                    )}
+
 
                 </DialogContent>
             </Dialog>
@@ -163,20 +183,21 @@ const Page = () => {
 
                     }, index) => (
                         <Card className=" w-full" key={index}>
-                            <CardHeader>
-                                <CardTitle className='gap-2 flex items-center'>{post?.title}  <Badge className='inline'>{post.type}</Badge></CardTitle>
+                            <CardHeader className='items-start'>
+                                <CardTitle className='gap-2 flex items-center text-base'>{post?.title}  </CardTitle>
+                                <Badge className='inline'>{post.type}</Badge>
                             </CardHeader>
                             <CardContent>
                                 <CardDescription>
 
-                                    {post?.body.substring(0, 60)}...
+                                    {post?.body.substring(0, 120)}...
                                 </CardDescription>
                             </CardContent>
                             <CardFooter className="flex justify-end">
 
                                 <AlertDialog>
                                     <AlertDialogTrigger asChild>
-                                        <Button variant="outline">Show Dialog</Button>
+                                        <Button variant="outline">Show Full Post</Button>
                                     </AlertDialogTrigger>
                                     <AlertDialogContent>
                                         <AlertDialogHeader>

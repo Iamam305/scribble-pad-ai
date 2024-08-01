@@ -28,7 +28,7 @@ post_app.post("/linkedin", async (c) => {
       console.log(post_generation_error);
       return c.json({ error: post_generation_error }, 500);
     }
-console.log(post);
+    console.log(post);
 
     const title = extract_string_between_tags(post as string, "post_title");
     const linkedin_post = extract_string_between_tags(
@@ -36,7 +36,7 @@ console.log(post);
       "linkedin_post"
     );
     console.log(title, linkedin_post);
-    
+
     const new_post = await new POST({
       author: user._id,
       body: linkedin_post,
@@ -65,7 +65,8 @@ post_app.get("/", async (c) => {
       : { author: user._id };
     const posts = await POST.find(query_fileter)
       .skip((+page - 1) * limit)
-      .limit(Number(limit));
+      .limit(Number(limit))
+      .sort({ createdAt: -1 });
 
     return c.json({ posts });
   } catch (error) {
