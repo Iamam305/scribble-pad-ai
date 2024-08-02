@@ -8,22 +8,22 @@ export const file_upload_app = new Hono();
 
 file_upload_app.post("/", async (c) => {
   try {
-    const body = await c.req.formData()
-  console.log(body)
- 
-  const file = body.get("audio") as File;
-  console.log(file);
+    const body = await c.req.formData();
+    console.log(body);
 
-  // const { file } = body;
-  const arrayBuffer = await file?.arrayBuffer();
-  const fileContent = new Uint8Array(arrayBuffer);
-    
-    const file_key = `audio/${randomUUID()}.mp3`;
+    const file = body.get("audio") as File;
+    console.log(file);
+
+    // const { file } = body;
+    const arrayBuffer = await file?.arrayBuffer();
+    const fileContent = new Uint8Array(arrayBuffer);
+
+    const file_key = `audio/${file.name}`;
     await s3_client.send(
       new PutObjectCommand({
         Bucket: process.env.S3_BUCKET!,
         Key: file_key,
-        Body: fileContent ,
+        Body: fileContent,
         ACL: "public-read",
       })
     );

@@ -5,7 +5,9 @@ import { randomUUID } from "crypto";
 import { s3_client } from "@/configs/s3.config";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 
-export const transcribe = async (audio_file_key: string): Promise<[string | null, Error | string | null]> => {
+export const transcribe = async (
+  audio_file_key: string
+): Promise<[string | null, Error | string | null]> => {
   try {
     const [audio_temp_file, audio_temp_file_error] =
       await download_file_from_s3(audio_file_key);
@@ -17,7 +19,7 @@ export const transcribe = async (audio_file_key: string): Promise<[string | null
       apiKey: process.env.GROQ_API_KEY!,
     });
 
-    const transcription = await groq.audio.transcriptions.create({
+    const transcription = await groq.audio.translations.create({
       file: fs.createReadStream(audio_temp_file),
       model: "whisper-large-v3",
       response_format: "json", // Optional
