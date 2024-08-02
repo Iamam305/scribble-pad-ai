@@ -6,7 +6,7 @@ import { Features } from "@/components/home/Features";
 import { Footer } from "@/components/home/Footer";
 import { Hero } from "@/components/home/Hero";
 import { HowItWorks } from "@/components/home/HowItWorks";
-import { Navbar } from "@/components/home/Navbar";
+
 import { Newsletter } from "@/components/home/Newsletter";
 import { Pricing } from "@/components/home/Pricing";
 import { ScrollToTop } from "@/components/home/ScrollToTop";
@@ -19,18 +19,18 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <Navbar />
+
       <Hero />
-      <Sponsors />
-      <About />
       <HowItWorks />
-      <Features />
       <Services />
+      <Sponsors />
+      <Features />
+      {/* <About /> */}
+      {/* <Newsletter /> */}
       <Cta />
-      <Testimonials />
-      <Team />
+      {/* <Testimonials /> */}
+      {/* <Team /> */}
       <Pricing />
-      <Newsletter />
       <FAQ />
       <Footer />
       <ScrollToTop />

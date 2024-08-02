@@ -2,46 +2,58 @@ import { Button } from "@/components/ui/button";
 import { buttonVariants } from "@/components/ui/button";
 import { HeroCards } from "./HeroCards";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Trial from "./trial";
 
+
+const words = ['LinkedIn Post', 'Twitter/X Thread', 'Blog Post'];
 export const Hero = () => {
+  const [currentWord, setCurrentWord] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section className="container grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10">
       <div className="text-center lg:text-start space-y-6">
         <main className="text-5xl md:text-6xl font-bold">
           <h1 className="inline">
+            Translate Your {" "}
             <span className="inline bg-gradient-to-r from-[#F596D3]  to-[#D247BF] text-transparent bg-clip-text">
-              Shadcn
+              Thoughts
             </span>{" "}
-            landing page
+            into Powerful
           </h1>{" "}
-          for{" "}
-          <h2 className="inline">
-            <span className="inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
-              React
+
+          <h2 className="">
+            <span className=" bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text">
+
+              {words[currentWord]}
+
+              {/* Content */}
             </span>{" "}
-            developers
+            with ScribblePad AI
           </h2>
         </main>
 
         <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-          Build your React landing page effortlessly with the required sections
-          to your project.
+          Are you bursting with brilliant ideas but struggle to organize them into compelling posts? ScribblePad AI is here to revolutionize your content creation process.
         </p>
 
-        <div className="space-y-4 md:space-y-0 md:space-x-4">
-          <Button className="w-full md:w-1/3">Get Started</Button>
+        <div className="flex gap-2">
+          <Link href={"/register"} >
+            <Button size={"lg"}>
+              Get Started
+            </Button>
+          </Link>
+          <Trial />
 
-          <a
-            rel="noreferrer noopener"
-            href="https://github.com/leoMirandaa/shadcn-landing-page.git"
-            target="_blank"
-            className={`w-full md:w-1/3 ${buttonVariants({
-              variant: "outline",
-            })}`}
-          >
-            Github Repository
-            <GitHubLogoIcon className="ml-2 w-5 h-5" />
-          </a>
+
         </div>
       </div>
 

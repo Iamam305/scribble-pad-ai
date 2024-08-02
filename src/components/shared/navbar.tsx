@@ -1,146 +1,149 @@
-import { CircleUser, Menu, Package2, Search } from 'lucide-react'
-import React from 'react'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
-import Link from 'next/link'
+import { useState } from "react";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-const Navbar = () => {
-    return (
-        <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
-            <div className='w-full'>
-                Scribble Pad Ai
-            </div>
-            {/* <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-                <Link
-                    href="#"
-                    className="flex items-center gap-2 text-lg font-semibold md:text-base"
-                >
-                    <Package2 className="h-6 w-6" />
-                    <span className="sr-only">Acme Inc</span>
-                </Link>
-                <Link
-                    href="#"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                    Dashboard
-                </Link>
-                <Link
-                    href="#"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                    Orders
-                </Link>
-                <Link
-                    href="#"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                    Products
-                </Link>
-                <Link
-                    href="#"
-                    className="text-muted-foreground transition-colors hover:text-foreground"
-                >
-                    Customers
-                </Link>
-                <Link
-                    href="#"
-                    className="text-foreground transition-colors hover:text-foreground"
-                >
-                    Settings
-                </Link>
-            </nav>
-            <Sheet>
-                <SheetTrigger asChild>
-                    <Button
-                        variant="outline"
-                        size="icon"
-                        className="shrink-0 md:hidden"
-                    >
-                        <Menu className="h-5 w-5" />
-                        <span className="sr-only">Toggle navigation menu</span>
-                    </Button>
-                </SheetTrigger>
-                <SheetContent side="left">
-                    <nav className="grid gap-6 text-lg font-medium">
-                        <Link
-                            href="#"
-                            className="flex items-center gap-2 text-lg font-semibold"
-                        >
-                            <Package2 className="h-6 w-6" />
-                            <span className="sr-only">Acme Inc</span>
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Dashboard
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Orders
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Products
-                        </Link>
-                        <Link
-                            href="#"
-                            className="text-muted-foreground hover:text-foreground"
-                        >
-                            Customers
-                        </Link>
-                        <Link href="#" className="hover:text-foreground">
-                            Settings
-                        </Link>
-                    </nav>
-                </SheetContent>
-            </Sheet> */}
-            <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-                <Link
-                    href="/app"
-                    className="text-foreground transition-colors hover:text-foreground ml-auto flex-1 sm:flex-initial"
-                >
-                    <Button>
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { buttonVariants } from "@/components/ui/button";
+import { Menu } from "lucide-react";
 
-                        App
-                    </Button>
-                </Link>
-                {/* <form className="ml-auto flex-1 sm:flex-initial">
-                    <div className="relative">
-                        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                        <Input
-                            type="search"
-                            placeholder="Search products..."
-                            className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
-                        />
-                    </div>
-                </form>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="secondary" size="icon" className="rounded-full">
-                            <CircleUser className="h-5 w-5" />
-                            <span className="sr-only">Toggle user menu</span>
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
-                        <DropdownMenuItem>Support</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Logout</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu> */}
-            </div>
-        </header>
+import { LogoIcon } from "../home/Icons";
+import Link from "next/link";
 
-    )
+interface RouteProps {
+  href: string;
+  label: string;
 }
 
-export default Navbar
+const routeList: RouteProps[] = [
+  {
+    href: "/#features",
+    label: "Features",
+  },
+  {
+    href: "/#testimonials",
+    label: "Testimonials",
+  },
+  {
+    href: "/#pricing",
+    label: "Pricing",
+  },
+  {
+    href: "/#faq",
+    label: "FAQ",
+  },
+];
+
+export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  return (
+    <header className="sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background">
+      <NavigationMenu className="mx-auto">
+        <NavigationMenuList className="container h-14 px-4 w-screen flex justify-between ">
+          <NavigationMenuItem className="font-bold flex">
+            <Link
+              rel="noreferrer noopener"
+              href="/"
+              className="ml-2 font-bold text-xl flex"
+            >
+              {/* <LogoIcon /> */}
+              ScribblePad AI
+            </Link>
+          </NavigationMenuItem>
+
+          {/* mobile */}
+          <span className="flex md:hidden">
+
+
+            <Sheet
+              open={isOpen}
+              onOpenChange={setIsOpen}
+            >
+              <SheetTrigger className="px-2">
+                <Menu
+                  className="flex md:hidden h-5 w-5"
+                  onClick={() => setIsOpen(true)}
+                >
+                  <span className="sr-only">Menu Icon</span>
+                </Menu>
+              </SheetTrigger>
+
+              <SheetContent side={"left"}>
+                <SheetHeader>
+                  <SheetTitle className="font-bold text-xl">
+                    Shadcn/React
+                  </SheetTitle>
+                </SheetHeader>
+                <nav className="flex flex-col justify-center items-center gap-2 mt-4">
+                  {routeList.map(({ href, label }: RouteProps) => (
+                    <Link
+                      rel="noreferrer noopener"
+                      key={label}
+                      href={href}
+                      onClick={() => setIsOpen(false)}
+                      className={buttonVariants({ variant: "ghost" })}
+                    >
+                      {label}
+                    </Link>
+                  ))}
+                  <Link
+
+                    href='/app'
+
+                    className={`w-[110px] border ${buttonVariants({
+                      variant: "secondary",
+                    })}`}
+                  >
+
+                    Login
+                  </Link>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </span>
+
+          {/* desktop */}
+          <nav className="hidden md:flex gap-2">
+            {routeList.map((route: RouteProps, i) => (
+              <Link
+                rel="noreferrer noopener"
+                href={route.href}
+                key={i}
+                className={`text-[17px] ${buttonVariants({
+                  variant: "ghost",
+                })}`}
+              >
+                {route.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="hidden md:flex gap-2">
+            <Link
+
+              href='/app'
+
+              className={`w-[110px] border ${buttonVariants({
+                variant: "secondary",
+              })}`}
+            >
+
+              Login
+            </Link>
+
+
+          </div>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </header>
+  );
+};

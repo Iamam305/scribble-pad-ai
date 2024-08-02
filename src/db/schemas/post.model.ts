@@ -8,10 +8,11 @@ const post_schema = new mongoose.Schema(
     type: {
       type: String,
       required: true,
-      enum: ["linkedin-post", "blogpost", "twitter-thread"],
+      enum: ["linkedin-post", "blog-post", "twitter-thread"],
     },
     transcription_key: { type: String },
     audio_file_key: { type: String },
+    extra_info: { type: Object },
   },
   {
     timestamps: true,

@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "./Icons";
+import { Mic, Sparkles, Upload } from "lucide-react";
 
 
 
@@ -11,29 +12,24 @@ interface FeatureProps {
 
 const features: FeatureProps[] = [
   {
-    icon: <MedalIcon />,
-    title: "Accessibility",
+    icon: <Mic />,
+    title: "Record Your Thoughts",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      " Speak freely about your ideas, thoughts, and concepts. No need to worry about structure or coherence at this stage—just let your thoughts flow.",
   },
   {
-    icon: <MapIcon />,
-    title: "Community",
+    icon: <Upload />,
+    title: "Upload Your Audio",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Visit ScribblePad-AI.com and upload your recorded audio. Our intuitive platform makes the process quick and easy.",
   },
   {
-    icon: <PlaneIcon />,
-    title: "Scalability",
+    icon: <Sparkles />,
+    title: "Receive Structured Content:",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
+      "Sit back and relax while ScribblePad AI converts your raw audio into a well-structured LinkedIn post, blog post, or Twitter thread. It's that simple!",
   },
-  {
-    icon: <GiftIcon />,
-    title: "Gamification",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum quas provident cum",
-  },
+
 ];
 
 export const HowItWorks = () => {
@@ -42,19 +38,16 @@ export const HowItWorks = () => {
       id="howItWorks"
       className="container text-center py-24 sm:py-32"
     >
-      <h2 className="text-3xl md:text-4xl font-bold ">
+      <h2 className="text-3xl md:text-4xl font-bold mb-10">
         How It{" "}
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
           Works{" "}
         </span>
         Step-by-Step Guide
       </h2>
-      <p className="md:w-3/4 mx-auto mt-4 mb-8 text-xl text-muted-foreground">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-        dolor pariatur sit!
-      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {features.map(({ icon, title, description }: FeatureProps) => (
           <Card
             key={title}

@@ -6,7 +6,7 @@ const connection: any = {
 export const connect_db = async () => {
   const db_options: ConnectOptions = {
     // dbName: "CallRecAi",
-    // maxPoolSize: 10,
+    maxPoolSize: 10,
   };
   try {
     if (connection.isConnected) {

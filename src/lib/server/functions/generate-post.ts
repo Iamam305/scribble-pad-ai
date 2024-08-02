@@ -1,15 +1,11 @@
-import path from "path";
-import os from "os";
-import fs from "fs";
-import { TextLoader } from "langchain/document_loaders/fs/text";
-import { download_file_from_s3 } from "./download-file-from-s3";
 import { ChatAnthropic } from "@langchain/anthropic";
-import { linkedin_post_prompt } from "../prompts/linkedin-post-prompt";
-import { extract_string_between_tags } from "./extract-string-bw-tags";
-import { twitter_thread_prompt } from "../prompts/twitter-thread-prompt";
-
-export const generate_twitter_thread = async (
-  transcription_file_key: string
+import { TextLoader } from "langchain/document_loaders/fs/text";
+import { blog_post_prompt } from "../prompts/blog-post-prompt";
+import { download_file_from_s3 } from "./download-file-from-s3";
+import { PromptTemplate } from "@langchain/core/prompts";
+export const generate_blog_post = async (
+  transcription_file_key: string,
+  prompt: typeof PromptTemplate
 ): Promise<[string | null, Error | string | null]> => {
   try {
     const [transcription_temp_file, transcription_temp_file_error] =
@@ -35,8 +31,8 @@ export const generate_twitter_thread = async (
       maxTokensToSample: 4000,
     });
 
-    const chain = twitter_thread_prompt.pipe(llm);
-
+    const chain = blog_post_prompt.pipe(llm);
+    // blog_post_prompt;
     const result = await chain.invoke({
       transcription: merged_transcription,
     });

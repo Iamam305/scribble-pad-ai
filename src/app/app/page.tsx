@@ -1,4 +1,5 @@
 "use client"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -7,6 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination'
 import { Progress } from '@/components/ui/progress'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from '@/components/ui/use-toast'
@@ -141,8 +143,8 @@ const Page = () => {
                                                         <SelectGroup>
                                                             <SelectLabel>Post Types</SelectLabel>
                                                             <SelectItem value="linkedin">Linkedin Post</SelectItem>
-                                                            <SelectItem value="blogpost" disabled={true}>Blog Post (comming soon)</SelectItem>
-                                                            <SelectItem value="twitter-thread" disabled={true}>Twitter Thread (comming soon)</SelectItem>
+                                                            <SelectItem value="blog-post" >Blog Post</SelectItem>
+                                                            <SelectItem value="twitter-thread" >Twitter Thread</SelectItem>
 
                                                         </SelectGroup>
                                                     </SelectContent>
@@ -173,14 +175,16 @@ const Page = () => {
                 </DialogContent>
             </Dialog>
 
-            <div className='grid md:grid-cols-3  justify-center gap-4  md:mx-auto '>
+            <div className='  md:mx-auto '>
+                <div className='grid md:grid-cols-3  justify-center gap-4'>
+
                 {
                     posts?.map((post: {
                         title: string;
                         body: string;
                         _id: string;
                         type: string;
-
+                        extra_info: any;
                     }, index) => (
                         <Card className=" w-full" key={index}>
                             <CardHeader className='items-start'>
@@ -202,8 +206,45 @@ const Page = () => {
                                     <AlertDialogContent>
                                         <AlertDialogHeader>
                                             <AlertDialogTitle>{post?.title}</AlertDialogTitle>
+
+
                                             <AlertDialogDescription>
-                                                {post?.body}
+                                                {post.type == "blog-post" ? (
+                                                    <>
+                                                        <Accordion type="single" collapsible className="w-full">
+                                                            <AccordionItem value="item-1">
+                                                                <AccordionTrigger>Description</AccordionTrigger>
+                                                                <AccordionContent>
+                                                                    {post?.extra_info.description}
+                                                                </AccordionContent>
+                                                            </AccordionItem>
+                                                            <AccordionItem value="item-2">
+                                                                <AccordionTrigger>Tags</AccordionTrigger>
+                                                                <AccordionContent>
+                                                                    {post?.extra_info.tags}
+                                                                </AccordionContent>
+                                                            </AccordionItem>
+
+                                                        </Accordion>
+                                                    </>
+                                                ) : ""}
+                                                {post.type == "twitter-thread" ? (
+                                                    <>
+                                                        {post
+                                                            ?.body
+                                                            .split(/\d+\.\s/)
+                                                            .filter((item) => item.trim() !== '')
+                                                            .map((item, index) => (
+                                                                <p className='mb-2' key={index}>
+                                                                    {index + 1}. {item}
+                                                                </p>
+                                                            ))}
+                                                    </>
+                                                ) : (
+                                                    <p>{post?.body}</p>
+                                                )}
+
+
                                             </AlertDialogDescription>
                                         </AlertDialogHeader>
                                         <AlertDialogFooter>
@@ -216,7 +257,24 @@ const Page = () => {
                         </Card>
                     ))
                 }
+                </div>
 
+                {/* <Pagination>
+                    <PaginationContent>
+                        <PaginationItem>
+                            <PaginationPrevious href="#" />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">1</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationEllipsis />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationNext href="#" />
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination> */}
             </div>
         </div>
 

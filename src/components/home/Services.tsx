@@ -2,6 +2,8 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/ca
 import { MagnifierIcon, WalletIcon, ChartIcon } from "./Icons";
 import cubeLeg from "../../assets/cube-leg.png";
 import Image from "next/image";
+import { Layout, Linkedin } from "lucide-react";
+import { TwitterLogoIcon } from "@radix-ui/react-icons";
 
 interface ServiceProps {
   title: string;
@@ -11,22 +13,22 @@ interface ServiceProps {
 
 const serviceList: ServiceProps[] = [
   {
-    title: "Code Collaboration",
+    title: "LinkedIn Posts",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <ChartIcon />,
+      "Engage your professional network with well-crafted updates.",
+    icon: <Linkedin className=" m-4"/>,
   },
   {
-    title: "Project Management",
+    title: "Blog Posts",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <WalletIcon />,
+      " Turn your ideas into insightful articles that resonate with your readers.",
+    icon: <Layout className=" m-4"/>,
   },
   {
-    title: "Task Automation",
+    title: "Twitter Threads:",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi nesciunt est nostrum omnis ab sapiente.",
-    icon: <MagnifierIcon />,
+      "Break down complex thoughts into digestible tweets.",
+    icon: <TwitterLogoIcon className=" m-4" />,
   },
 ];
 
@@ -37,14 +39,13 @@ export const Services = () => {
         <div>
           <h2 className="text-3xl md:text-4xl font-bold">
             <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-              Client-Centric{" "}
+              One Tool,
             </span>
-            Services
+            Multiple Formats
           </h2>
 
           <p className="text-muted-foreground text-xl mt-4 mb-8 ">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis
-            dolor.
+          Whether you're a professional looking to enhance your LinkedIn presence, a blogger seeking inspiration, or a Twitter enthusiast aiming for the perfect thread, ScribblePad AI has you covered.
           </p>
 
           <div className="flex flex-col gap-8">
