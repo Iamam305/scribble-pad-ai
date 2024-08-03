@@ -4,7 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/toaster";
-import { Navbar } from "@/components/shared/Navbar";
+import { Navbar } from "@/components/shared/navbar";
+// import { Navbar } from "@/components/shared/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
