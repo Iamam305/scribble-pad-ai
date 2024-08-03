@@ -45,7 +45,7 @@ export const Services = () => {
           </h2>
 
           <p className="text-muted-foreground text-xl mt-4 mb-8 ">
-          Whether you're a professional looking to enhance your LinkedIn presence, a blogger seeking inspiration, or a Twitter enthusiast aiming for the perfect thread, ScribblePad AI has you covered.
+          Whether you&apos;re a professional looking to enhance your LinkedIn presence, a blogger seeking inspiration, or a Twitter enthusiast aiming for the perfect thread, ScribblePad AI has you covered.
           </p>
 
           <div className="flex flex-col gap-8">

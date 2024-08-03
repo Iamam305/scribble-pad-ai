@@ -14,7 +14,7 @@ export const Cta = () => {
             Ready to Amplify Your Voice?
           </h2>
           <p className="text-muted-foreground text-xl mt-4 mb-8 lg:mb-0">
-            Don't let great ideas get lost in translation. With ScribblePad AI, your thoughts become impactful content at the speed of speech.
+            Don&apos;t let great ideas get lost in translation. With ScribblePad AI, your thoughts become impactful content at the speed of speech.
           </p>
         </div>
 
