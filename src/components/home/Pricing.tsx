@@ -26,48 +26,47 @@ interface PricingProps {
 
 const pricingList: PricingProps[] = [
   {
-    title: "Free",
+    title: "Casual Creator (Free)",
     popular: 0,
     price: 0,
     description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
+      "Perfect for individuals just getting started with AI-assisted content creation.",
+    buttonText: "Get Started Free",
+    benefitList: [
+      "2 post generations per day",
+      "15 posts per month",
+      "Basic email support",
+      "Access to essential features",
+   
+    ],
+  },
+  {
+    title: "Regular Influencer",
+    popular: 1,
+    price: 7,
+    description:
+      "Ideal for active content creators and budding influencers.",
     buttonText: "Get Started",
     benefitList: [
-      "1 Team member",
-      "2 GB Storage",
-      "Upto 4 pages",
-      "Community support",
-      "lorem ipsum dolor",
+      "40 posts per month",
+      "Priority email support",
+      "Advanced content optimization",
+      "Analytics dashboard",
+     
     ],
   },
   {
-    title: "Premium",
-    popular: 1,
-    price: 5,
-    description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-    buttonText: "Start Free Trial",
-    benefitList: [
-      "4 Team member",
-      "4 GB Storage",
-      "Upto 6 pages",
-      "Priority support",
-      "lorem ipsum dolor",
-    ],
-  },
-  {
-    title: "Enterprise",
+    title: "Content Powerhouse",
     popular: 0,
-    price: 40,
+    price: 20,
     description:
-      "Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.",
-    buttonText: "Contact US",
+      "For serious content creators, marketers, and businesses.",
+    buttonText: "Go Ultimate",
     benefitList: [
-      "10 Team member",
-      "8 GB Storage",
-      "Upto 10 pages",
-      "Priority support",
-      "lorem ipsum dolor",
+      "Unlimited posts per month",
+      "24/7 priority support",
+      "Advanced AI customization",
+     
     ],
   },
 ];
