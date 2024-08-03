@@ -4,6 +4,7 @@ import { transcription_app } from "./transcription";
 import { generate_post_app } from "./generate-post";
 import { auth_middleware } from "@/lib/server/middleware/auth.middleware";
 import { post_app } from "./post";
+import { trial_app } from "./trial";
 
 export const main = new Hono<{
   Variables: {
@@ -14,7 +15,8 @@ export const main = new Hono<{
     };
   };
 }>();
-main.use(auth_middleware);
+// main.use();
 main.route("/file-upload", file_upload_app);
 main.route("/transcription", transcription_app);
 main.route("/post", post_app);
+main.route("/trial", trial_app);

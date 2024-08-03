@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
 import { Progress } from '../ui/progress';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
+import { ScrollArea } from '../ui/scroll-area';
 type create_post_input = {
     audio: FileList,
     type: string
@@ -17,7 +19,7 @@ const Trial = () => {
     const [creation_status, setCreation_status] = useState("standby")
     const [create_post_open, setCreate_post_open] = useState(false);
     const form = useForm<create_post_input>();
-    const [post, setPost] = useState(null)
+    const [post_data, setPost_data] = useState<any>(null)
 
     const on_submit: SubmitHandler<create_post_input> = async (data) => {
         try {
@@ -50,14 +52,16 @@ const Trial = () => {
                     title: 'Post Created',
                 })
                 setCreation_status("standby")
-                setCreate_post_open(false)
+
+                setPost_data(create_post_res.data)
             }
             else {
                 toast({
                     title: 'Error creating post',
                 })
                 setCreation_status("standby")
-                setCreate_post_open(false)
+
+                setPost_data(null)
             }
         } catch (error) {
             console.log(error);
@@ -65,20 +69,73 @@ const Trial = () => {
                 title: 'Error creating post',
             })
             setCreation_status("standby")
-            setCreate_post_open(false)
+
+            setPost_data(null)
         }
 
     };
     return (
-        <Dialog >
+        <Dialog open={creation_status === "standby" ? create_post_open : true} onOpenChange={setCreate_post_open} >
 
             <DialogTrigger asChild>
                 <Button size={"lg"} variant={'secondary'}> Try Now</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px] md:max-w-3xl ">
 
-                {creation_status === "standby" ? (
-                    <>
+                {post_data ? (
+                    <ScrollArea className="h-[50vh]" >
+
+                        <>
+                            <DialogHeader>
+                                <DialogTitle>{post_data?.title}</DialogTitle>
+
+
+                                <DialogDescription>
+                                    {post_data.type == "blog-post" ? (
+                                        <>
+                                            <Accordion type="single" collapsible className="w-full">
+                                                <AccordionItem value="item-1">
+                                                    <AccordionTrigger>Description</AccordionTrigger>
+                                                    <AccordionContent>
+                                                        {post_data?.extra_info.description}
+                                                    </AccordionContent>
+                                                </AccordionItem>
+                                                <AccordionItem value="item-2">
+                                                    <AccordionTrigger>Tags</AccordionTrigger>
+                                                    <AccordionContent>
+                                                        {post_data?.extra_info.tags}
+                                                    </AccordionContent>
+                                                </AccordionItem>
+
+                                            </Accordion>
+                                        </>
+                                    ) : ""}
+                                    {post_data.type == "twitter-thread" ? (
+                                        <>
+                                            {post_data
+                                                ?.body
+                                                .split(/\d+\.\s/)
+                                                .filter((item: any) => item.trim() !== '')
+                                                .map((item: any, index: number) => (
+                                                    <p className='mb-2' key={index}>
+                                                        {index + 1}. {item}
+                                                    </p>
+                                                ))}
+                                        </>
+                                    ) : (
+                                        <p>{post_data?.body}</p>
+                                    )}
+
+
+                                </DialogDescription>
+                            </DialogHeader>
+
+                        </>
+                    </ScrollArea >
+                ) : ""}
+
+                {(creation_status === "standby") ? (
+                    <div className='mt-10'>
                         <DialogHeader>
                             <DialogTitle>Create Post</DialogTitle>
                             <DialogDescription>
@@ -108,7 +165,7 @@ const Trial = () => {
                                                 <SelectContent >
                                                     <SelectGroup>
                                                         <SelectLabel>Post Types</SelectLabel>
-                                                        <SelectItem value="linkedin">Linkedin Post</SelectItem>
+                                                        <SelectItem value="linkedin-post">Linkedin Post</SelectItem>
                                                         <SelectItem value="blog-post" >Blog Post</SelectItem>
                                                         <SelectItem value="twitter-thread" >Twitter Thread</SelectItem>
 
@@ -127,7 +184,7 @@ const Trial = () => {
                                 </DialogFooter>
                             </form>
                         </Form>
-                    </>
+                    </div>
                 ) : (
                     <>
                         <DialogHeader className='gap-2'>

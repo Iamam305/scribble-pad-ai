@@ -4,10 +4,11 @@ import { generate_blog_post } from "@/lib/server/functions/generate-blog-post";
 import { generate_linkedin_post } from "@/lib/server/functions/generate-linkedin-post";
 import { generate_twitter_thread } from "@/lib/server/functions/generate-twitter-thread";
 import { transcribe } from "@/lib/server/functions/transcribe";
+import { auth_middleware } from "@/lib/server/middleware/auth.middleware";
 import { Hono } from "hono";
 
 export const post_app = new Hono<{ Variables: { user: any } }>();
-
+post_app.use(auth_middleware);
 post_app.post("/linkedin", async (c) => {
   try {
     const { audio_file_key } = await c.req.json();
