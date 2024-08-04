@@ -40,7 +40,7 @@ const Page = () => {
       if (res.status === 201 || res.status === 200) {
 
         toast({
-          title: 'Login successful',
+          title: 'Registration Successful',
 
         })
         setLoading(false)

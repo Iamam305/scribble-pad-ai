@@ -43,8 +43,8 @@ const Page = () => {
 
         })
 
-        setLoading(false)
         router.push("/app")
+        setLoading(false)
       }
       else {
         toast({
