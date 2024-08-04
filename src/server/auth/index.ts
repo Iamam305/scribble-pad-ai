@@ -33,11 +33,11 @@ auth_app.post("/register", async (c) => {
 
       if (new_user) {
         const data = await resend.emails.send({
-          from: `Ajitesh <ajiteshm141@gmail.com>`,
+          from: `Ajitesh <ajitesh@scribblepad-ai.com>`,
           to: email,
           subject: " Email Verification Code",
           text: "Verification code - " + code,
-          html: "5",
+         
         });
         console.log(data);
         return c.json({ msg: "Email Sent Sucessfully" });
