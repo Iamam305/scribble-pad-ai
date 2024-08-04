@@ -147,7 +147,7 @@ const Trial = () => {
                             <form onSubmit={form.handleSubmit(on_submit)} className="grid gap-4 py-4">
                                 <div className="grid grid-cols-4 items-center gap-4">
                                     <Label htmlFor="audio_file" className="text-right">Audio File</Label>
-                                    <Input id="audio_file" type="file" className="col-span-3" {...form.register("audio")} required />
+                                    <Input id="audio_file" type="file" accept=".mp3,audio/*" className="col-span-3" {...form.register("audio")} required />
                                 </div>
                                 <FormField
                                     control={form.control}
