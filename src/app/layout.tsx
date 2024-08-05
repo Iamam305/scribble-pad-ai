@@ -6,6 +6,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from "@/components/shared/navbar";
 import { Suspense } from "react";
+import Script from "next/script";
 // import { Navbar } from "@/components/shared/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,6 +31,9 @@ export default function RootLayout({
           {children}
         </main>
         <Toaster />
+        <Script src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "785d79991a9f4fe3b8a100cfe895643f"}' defer />
+
+
       </body>
     </html>
   );

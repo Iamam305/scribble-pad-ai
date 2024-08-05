@@ -78,7 +78,7 @@ const FAQList: FAQProps[] = [{
 },
 {
   "question": "How can I get help if I'm having issues?",
-  "answer": "Our support team is available via email at support@scribblepad-ai.com. For Pro and Enterprise users, we also offer priority chat support.",
+  "answer": "Our support team is available via email at ajitesh@scribblepad-ai.com. For Pro and Enterprise users, we also offer priority chat support.",
   "value": "item-14"
 },
 {
@@ -88,7 +88,7 @@ const FAQList: FAQProps[] = [{
 },
 {
   "question": "Can I request new features?",
-  "answer": "We love hearing from our users! You can submit feature requests through our feedback form in the app or by emailing suggestions@scribblepad-ai.com.",
+  "answer": "We love hearing from our users! You can submit feature requests through our feedback form in the app or by emailing ajitesh@scribblepad-ai.com.",
   "value": "item-16"
 }
 ];

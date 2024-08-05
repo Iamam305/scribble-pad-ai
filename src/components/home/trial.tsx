@@ -77,7 +77,7 @@ const Trial = () => {
         <Dialog open={creation_status === "standby" ? create_post_open : true} onOpenChange={setCreate_post_open} >
 
             <DialogTrigger asChild>
-                <Button size={"lg"} variant={'secondary'}> Try Now</Button>
+                <Button size={"lg"} variant={'secondary'}> Try Now Without an Account </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] md:max-w-3xl ">
 
