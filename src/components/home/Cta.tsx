@@ -18,7 +18,7 @@ export const Cta = () => {
           </p>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-4 flex-wrap">
           <Link href="/register">
             <Button className="w-full " size={"lg"}>Sign Up</Button>
           </Link>

@@ -45,7 +45,7 @@ export const Hero = () => {
           Are you bursting with brilliant ideas but struggle to organize them into compelling posts? ScribblePad AI is here to revolutionize your content creation process.
         </p>
 
-        <div className="flex gap-2">
+        <div className="flex gap-4 flex-wrap items-stretch">
           <Link href={"/register"} >
             <Button size={"lg"}>
               Get Started
