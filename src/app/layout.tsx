@@ -39,7 +39,7 @@ export default function RootLayout({
         </main>
         <Toaster />
         <Suspense>
-          <Button variant={"default"} className="fixed bottom-6 right-6">
+          <Button variant={"default"} className="fixed bottom-4 right-4">
 
             <Link href={"https://insigh.to/b/scribble-pad-ai"} target={"_blank"}>
               Give Feedback

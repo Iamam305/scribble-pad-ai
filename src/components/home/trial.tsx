@@ -12,6 +12,7 @@ import { Progress } from '../ui/progress';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { ScrollArea } from '../ui/scroll-area';
 import { CopyIcon } from 'lucide-react';
+
 type create_post_input = {
     audio: FileList,
     type: string
@@ -80,10 +81,10 @@ const Trial = () => {
             <DialogTrigger asChild>
                 <Button size={"lg"} variant={'secondary'}> Try Now Without an Account </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px] md:max-w-3xl ">
+            <DialogContent className="sm:max-w-[425px] md:max-w-3xl">
 
                 {post_data ? (
-                    <ScrollArea className="h-[50vh]" >
+                    <ScrollArea className="min-h-[50vh]" >
 
                         <>
                             <DialogHeader>

@@ -16,7 +16,7 @@ export const main = new Hono<{
   };
 }>();
 // main.use();
-main.route("/file-upload", file_upload_app);
-main.route("/transcription", transcription_app);
 main.route("/post", post_app);
+main.route("/file-upload", file_upload_app);
+// main.route("/transcription", transcription_app);
 main.route("/trial", trial_app);

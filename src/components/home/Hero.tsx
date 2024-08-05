@@ -5,7 +5,7 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Trial from "./trial";
-
+import ReactPlayer from 'react-player'
 
 const words = ['LinkedIn Post', 'Twitter/X Thread', 'Blog Post'];
 export const Hero = () => {
@@ -58,8 +58,9 @@ export const Hero = () => {
       </div>
 
       {/* Hero cards sections */}
-      <div className="z-10">
-        <HeroCards />
+      <div className="z-10 w-full aspect-video">
+        <ReactPlayer url='https://www.youtube.com/watch?v=dPI-mRFEIH0' width={"100%"} height={"100%"} light />
+        {/* <HeroCards /> */}
       </div>
 
       {/* Shadow effect */}
