@@ -19,6 +19,6 @@ generate_post_app.post("/linkedin", async (c) => {
     return c.json({ post });
   } catch (error) {
     console.log(error);
-    return c.json({ error: "Somethings went wrong" }, 500);
+    return c.json({ err: "Somethings went wrong" }, 500);
   }
 });

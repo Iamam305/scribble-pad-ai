@@ -14,11 +14,15 @@ file_upload_app.post("/", async (c) => {
     const file = body.get("audio") as File;
     console.log(file);
 
+    if (!file || !file.type.startsWith("audio/")) {
+      return c.json({ error: "Only audio files are allowed" }, 400);
+    }
     // const { file } = body;
     const arrayBuffer = await file?.arrayBuffer();
     const fileContent = new Uint8Array(arrayBuffer);
 
-    const file_key = `audio/${file.name}`;
+    const file_key = `audio/${file.name.replace(/\s/g, "_")}`;
+
     await s3_client.send(
       new PutObjectCommand({
         Bucket: process.env.S3_BUCKET!,
@@ -28,7 +32,7 @@ file_upload_app.post("/", async (c) => {
       })
     );
     return c.json({
-      message: "Upload Success",
+      msg: "Upload Success",
       data: { audio_file_key: file_key },
     });
   } catch (error) {

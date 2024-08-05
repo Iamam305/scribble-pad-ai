@@ -11,6 +11,7 @@ import { Input } from '../ui/input';
 import { Progress } from '../ui/progress';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion';
 import { ScrollArea } from '../ui/scroll-area';
+import { CopyIcon } from 'lucide-react';
 type create_post_input = {
     audio: FileList,
     type: string
@@ -86,7 +87,9 @@ const Trial = () => {
 
                         <>
                             <DialogHeader>
-                                <DialogTitle>{post_data?.title}</DialogTitle>
+                                <DialogTitle>{post_data?.title} <Button onClick={() => navigator.clipboard.writeText(post_data?.title)} variant="outline" size="sm" className="p-2 ml-1">
+                                    <CopyIcon size={16} />
+                                </Button></DialogTitle>
 
 
                                 <DialogDescription>
@@ -96,13 +99,17 @@ const Trial = () => {
                                                 <AccordionItem value="item-1">
                                                     <AccordionTrigger>Description</AccordionTrigger>
                                                     <AccordionContent>
-                                                        {post_data?.extra_info.description}
+                                                        {post_data?.extra_info.description} <Button onClick={() => navigator.clipboard.writeText(post_data?.extra_info.description)} variant="outline" size="sm" className="p-2 ml-1">
+                                                            <CopyIcon size={16} />
+                                                        </Button>
                                                     </AccordionContent>
                                                 </AccordionItem>
                                                 <AccordionItem value="item-2">
                                                     <AccordionTrigger>Tags</AccordionTrigger>
                                                     <AccordionContent>
-                                                        {post_data?.extra_info.tags}
+                                                        {post_data?.extra_info.tags} <Button onClick={() => navigator.clipboard.writeText(post_data?.extra_info.tags)} variant="outline" size="sm" className="p-2 ml-1">
+                                                            <CopyIcon size={16} />
+                                                        </Button>
                                                     </AccordionContent>
                                                 </AccordionItem>
 
@@ -117,12 +124,16 @@ const Trial = () => {
                                                 .filter((item: any) => item.trim() !== '')
                                                 .map((item: any, index: number) => (
                                                     <p className='mb-2' key={index}>
-                                                        {index + 1}. {item}
+                                                        {index + 1}. {item} <Button onClick={() => navigator.clipboard.writeText(item)} variant="outline" size="sm" className="p-2 ml-1">
+                                                            <CopyIcon size={16} />
+                                                        </Button>
                                                     </p>
                                                 ))}
                                         </>
                                     ) : (
-                                        <p>{post_data?.body}</p>
+                                        <p>{post_data?.body} <Button onClick={() => navigator.clipboard.writeText(post_data?.body)} variant="outline" size="sm" className="p-2 ml-1">
+                                            <CopyIcon size={16} />
+                                        </Button></p>
                                     )}
 
 
