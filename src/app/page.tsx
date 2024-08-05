@@ -14,7 +14,9 @@ import { Services } from "@/components/home/Services";
 import { Sponsors } from "@/components/home/Sponsors";
 import { Team } from "@/components/home/Team";
 import { Testimonials } from "@/components/home/Testimonials";
+import { Metadata } from "next";
 import Image from "next/image";
+
 
 export default function Home() {
   return (

@@ -15,6 +15,7 @@ import { toast } from '@/components/ui/use-toast'
 import { axios_instance } from '@/configs/axios.config'
 import { AlertDialogCancel } from '@radix-ui/react-alert-dialog'
 import { Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -26,6 +27,7 @@ const Page = () => {
     const [posts, setPosts] = useState([])
     const [creation_status, setCreation_status] = useState("standby")
     const [create_post_open, setCreate_post_open] = useState(false);
+    const router = useRouter()
     console.log(posts);
 
     useEffect(() => {
@@ -101,9 +103,31 @@ const Page = () => {
         }
 
     };
-
+    const logout = async () => {
+        try {
+          const res = await axios_instance.request({
+            method: "POST",
+            url: "api/auth/logout",
+          })
+          if (res.status === 201 || res.status === 200) {
+            router.push("/login")
+            toast({
+              title: "Logout Successful",
+    
+            })
+          }
+    
+        } catch (error) {
+          toast({
+            title: "Error Logging Out",
+    
+          })
+        }
+      }
     return (
         <div className='w-full mx-4 md:mx-auto my-10 max-w-6xl flex flex-col items-end gap-6'>
+            <div className='flex gap-4 justify-between w-full'>
+            <Button onClick={logout} variant={'outline'} className='border-red-400 text-red-400'>Logout</Button>
             <Dialog open={creation_status === "standby" ? create_post_open : true} onOpenChange={setCreate_post_open}>
 
                 <DialogTrigger asChild>
@@ -174,6 +198,7 @@ const Page = () => {
 
                 </DialogContent>
             </Dialog>
+            </div>
 
             <div className='  md:mx-auto '>
                 <div className='grid md:grid-cols-3  justify-center gap-4'>

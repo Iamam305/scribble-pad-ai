@@ -64,6 +64,7 @@ const Page = () => {
     }
   };
 
+  
   return (
     <div className='flex w-full min-h-screen items-center justify-center' >
 
@@ -85,10 +86,17 @@ const Page = () => {
               <Input id="password" type="password" required {...register("password")} />
             </div>
           </CardContent>
-          <CardFooter>
+          <CardFooter className='flex-col'>
             <Button disabled={loading} type='submit' className="w-full">Sign in</Button>
+            <div className="mt-4 text-center text-sm">
+          New Here?{" "}
+          <Link href="/register" className="underline">
+            Register
+          </Link>
+        </div>
           </CardFooter>
         </form>
+       
       </Card>
     </div>
 
