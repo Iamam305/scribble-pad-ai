@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
-import PopupForm from "../ui/popup-form";
+import PopupForm from "../popup-form";
 import Link from "next/link";
 
 enum PopularPlanType {

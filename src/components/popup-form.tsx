@@ -12,7 +12,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { axios_instance } from "@/configs/axios.config"
 import { useState } from "react"
-import { toast } from "./use-toast"
+import { toast } from "./ui/use-toast"
+import { Textarea } from "./ui/textarea"
 const PopupForm = ({
     form_name,
     form_buttton_name,
@@ -91,10 +92,10 @@ const PopupForm = ({
                     </div>
 
                     <div className="flex flex-col w-full   gap-2">
-                        <Label htmlFor="email" className="text-left">
+                        <Label htmlFor="Message" className="text-left">
                             Message
                         </Label>
-                        <Input id="email" onChange={(e) => setForm_data({ ...form_data, message: e.target.value })} value={form_data.message} type="email" className="col-span-3" />
+                        <Textarea id="Message" onChange={(e) => setForm_data({ ...form_data, message: e.target.value })} value={form_data.message}  className="col-span-3" />
                     </div>
                 </div>
                 <DialogFooter>

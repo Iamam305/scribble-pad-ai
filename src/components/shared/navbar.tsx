@@ -19,7 +19,7 @@ import { Menu } from "lucide-react";
 
 import { LogoIcon } from "../home/Icons";
 import Link from "next/link";
-import PopupForm from "../ui/popup-form";
+import PopupForm from "../popup-form";
 
 interface RouteProps {
   href: string;
@@ -142,9 +142,9 @@ export const Navbar = () => {
               Login
             </Link>
             <PopupForm
-            form_name="Contact Us"
-            form_buttton_name="Contact Us"
-            form_description="Get in touch with us"
+              form_name="Contact Us"
+              form_buttton_name="Contact Us"
+              form_description="Get in touch with us"
             />
 
           </div>
