@@ -36,24 +36,14 @@ const Page = () => {
           password: data.password
         }
       })
-      if (res.status === 201 || res.status === 200) {
 
-        toast({
-          title: 'Login successful',
+      toast({
+        title: 'Login successful',
 
-        })
+      })
 
-        router.push("/app")
-        setLoading(false)
-      }
-      else {
-        toast({
-          title: res.data.msg
-        })
-        setLoading(false)
-      }
-
-
+      router.push("/app")
+      setLoading(false)
 
     } catch (error: any) {
       toast({
@@ -64,7 +54,7 @@ const Page = () => {
     }
   };
 
-  
+
   return (
     <div className='flex w-full min-h-screen items-center justify-center' >
 
@@ -89,14 +79,14 @@ const Page = () => {
           <CardFooter className='flex-col'>
             <Button disabled={loading} type='submit' className="w-full">Sign in</Button>
             <div className="mt-4 text-center text-sm">
-          New Here?{" "}
-          <Link href="/register" className="underline">
-            Register
-          </Link>
-        </div>
+              New Here?{" "}
+              <Link href="/register" className="underline">
+                Register
+              </Link>
+            </div>
           </CardFooter>
         </form>
-       
+
       </Card>
     </div>
 

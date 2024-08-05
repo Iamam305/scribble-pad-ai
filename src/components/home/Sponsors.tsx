@@ -28,7 +28,7 @@ export const Sponsors = () => {
   return (
     <section
       id="sponsors"
-      className="container pt-24 sm:py-32"
+      className="container  sm:py-14"
     >
       <h2 className="text-center text-md lg:text-xl font-bold mb-8 text-primary">
         Perfect For

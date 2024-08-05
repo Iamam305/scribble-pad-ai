@@ -57,19 +57,18 @@ const Trial = () => {
             }
             else {
                 toast({
-                    title: 'Error creating post',
+                    title: create_post_res.data.msg || 'Error creating post',
                 })
                 setCreation_status("standby")
 
                 setPost_data(null)
             }
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
             toast({
-                title: 'Error creating post',
+                title: error.response.data.msg || 'Error creating post',
             })
             setCreation_status("standby")
-
             setPost_data(null)
         }
 

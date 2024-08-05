@@ -19,6 +19,7 @@ import { Menu } from "lucide-react";
 
 import { LogoIcon } from "../home/Icons";
 import Link from "next/link";
+import PopupForm from "../ui/popup-form";
 
 interface RouteProps {
   href: string;
@@ -31,8 +32,8 @@ const routeList: RouteProps[] = [
     label: "Features",
   },
   {
-    href: "/#testimonials",
-    label: "Testimonials",
+    href: "/#how-it-works",
+    label: "How it works",
   },
   {
     href: "/#pricing",
@@ -140,7 +141,11 @@ export const Navbar = () => {
 
               Login
             </Link>
-
+            <PopupForm
+            form_name="Contact Us"
+            form_buttton_name="Contact Us"
+            form_description="Get in touch with us"
+            />
 
           </div>
         </NavigationMenuList>

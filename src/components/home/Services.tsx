@@ -16,13 +16,13 @@ const serviceList: ServiceProps[] = [
     title: "LinkedIn Posts",
     description:
       "Engage your professional network with well-crafted updates.",
-    icon: <Linkedin className=" m-4"/>,
+    icon: <Linkedin className=" m-4" />,
   },
   {
     title: "Blog Posts",
     description:
       " Turn your ideas into insightful articles that resonate with your readers.",
-    icon: <Layout className=" m-4"/>,
+    icon: <Layout className=" m-4" />,
   },
   {
     title: "Twitter Threads:",
@@ -34,7 +34,7 @@ const serviceList: ServiceProps[] = [
 
 export const Services = () => {
   return (
-    <section className="container py-24 sm:py-32">
+    <section id="features" className="container py-14">
       <div className="grid lg:grid-cols-[1fr,1fr] gap-8 place-items-center">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold">
@@ -45,7 +45,7 @@ export const Services = () => {
           </h2>
 
           <p className="text-muted-foreground text-xl mt-4 mb-8 ">
-          Whether you&apos;re a professional looking to enhance your LinkedIn presence, a blogger seeking inspiration, or a Twitter enthusiast aiming for the perfect thread, ScribblePad AI has you covered.
+            Whether you&apos;re a professional looking to enhance your LinkedIn presence, a blogger seeking inspiration, or a Twitter enthusiast aiming for the perfect thread, ScribblePad AI has you covered.
           </p>
 
           <div className="flex flex-col gap-8">

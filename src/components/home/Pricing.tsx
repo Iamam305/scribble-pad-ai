@@ -9,6 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import PopupForm from "../ui/popup-form";
+import Link from "next/link";
 
 enum PopularPlanType {
   NO = 0,
@@ -37,7 +39,7 @@ const pricingList: PricingProps[] = [
       "15 posts per month",
       "Basic email support",
       "Access to essential features",
-   
+
     ],
   },
   {
@@ -46,13 +48,13 @@ const pricingList: PricingProps[] = [
     price: 7,
     description:
       "Ideal for active content creators and budding influencers.",
-    buttonText: "Get Started",
+    buttonText: "Get Early Access (comming soon)",
     benefitList: [
       "40 posts per month",
       "Priority email support",
       "Advanced content optimization",
       "Analytics dashboard",
-     
+
     ],
   },
   {
@@ -61,12 +63,12 @@ const pricingList: PricingProps[] = [
     price: 20,
     description:
       "For serious content creators, marketers, and businesses.",
-    buttonText: "Go Ultimate",
+    buttonText: "Get Early Access (comming soon)",
     benefitList: [
       "Unlimited posts per month",
       "24/7 priority support",
       "Advanced AI customization",
-     
+
     ],
   },
 ];
@@ -75,20 +77,15 @@ export const Pricing = () => {
   return (
     <section
       id="pricing"
-      className="container py-24 sm:py-32"
+      className="container py-14 sm:py-14"
     >
-      <h2 className="text-3xl md:text-4xl font-bold text-center">
-        Get
-        <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          {" "}
-          Unlimited{" "}
-        </span>
-        Access
+      <h2 className="text-3xl md:text-4xl font-bold text-center my-10">
+        Pricing
       </h2>
-      <h3 className="text-xl text-center text-muted-foreground pt-4 pb-8">
+      {/* <h3 className="text-xl text-center text-muted-foreground pt-4 pb-8">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias
         reiciendis.
-      </h3>
+      </h3> */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {pricingList.map((pricing: PricingProps) => (
           <Card
@@ -120,7 +117,12 @@ export const Pricing = () => {
             </CardHeader>
 
             <CardContent>
-              <Button className="w-full">{pricing.buttonText}</Button>
+              {pricing.price !== 0 ? (
+                <>
+                  <PopupForm form_name={pricing.title} form_buttton_name={pricing.buttonText} form_description={pricing.description} />
+                </>
+              ) : <Link href={"/register"}><Button className="w-full">{pricing.buttonText}</Button></Link>}
+
             </CardContent>
 
             <hr className="w-4/5 m-auto mb-4" />

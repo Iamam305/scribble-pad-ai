@@ -21,13 +21,17 @@ trial_app.post("/", async (c) => {
     const posts_count = await POST.countDocuments({ unauth_uuid });
     console.log(posts_count);
 
-    if (posts_count >= 10) {
+    if (posts_count >= 5) {
       return c.json(
-        { error: "You have reached your post limit sign up for more" },
+        { msg: "You have reached your post limit sign up for more" },
         500
       );
     }
-    const avilable_post_types = ["linkedin-post", "blog-post", "twitter-thread"];
+    const avilable_post_types = [
+      "linkedin-post",
+      "blog-post",
+      "twitter-thread",
+    ];
     if (avilable_post_types.indexOf(post_type) === -1) {
       return c.json({ error: "Invalid post type" }, 500);
     }
@@ -88,7 +92,7 @@ trial_app.post("/", async (c) => {
       );
       const tags = extract_string_between_tags(post as string, "tags");
 
-      const new_post =await new POST({
+      const new_post = await new POST({
         title: title as string,
         body: blog_post as string,
         unauth_uuid,
@@ -118,7 +122,7 @@ trial_app.post("/", async (c) => {
         post as string,
         "twitter_thread"
       );
-      const new_post =await new POST({
+      const new_post = await new POST({
         title: title as string,
         body: twitter_thread as string,
         unauth_uuid,
