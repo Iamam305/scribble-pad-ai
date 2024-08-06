@@ -84,11 +84,11 @@ const Trial = () => {
             <DialogContent className="sm:max-w-[425px] md:max-w-3xl">
 
                 {post_data ? (
-                    <ScrollArea className="min-h-[50vh]" >
+                    <ScrollArea className="max-h-[60vh] " >
 
                         <>
                             <DialogHeader>
-                                <DialogTitle>{post_data?.title} <Button onClick={() => navigator.clipboard.writeText(post_data?.title)} variant="outline" size="sm" className="p-2 ml-1">
+                                <DialogTitle className='text-left'>{post_data?.title} <Button onClick={() => navigator.clipboard.writeText(post_data?.title)} variant="outline" size="sm" className="p-2 ml-1">
                                     <CopyIcon size={16} />
                                 </Button></DialogTitle>
 
@@ -99,7 +99,7 @@ const Trial = () => {
                                             <Accordion type="single" collapsible className="w-full">
                                                 <AccordionItem value="item-1">
                                                     <AccordionTrigger>Description</AccordionTrigger>
-                                                    <AccordionContent>
+                                                    <AccordionContent className='text-left'>
                                                         {post_data?.extra_info.description} <Button onClick={() => navigator.clipboard.writeText(post_data?.extra_info.description)} variant="outline" size="sm" className="p-2 ml-1">
                                                             <CopyIcon size={16} />
                                                         </Button>
@@ -107,7 +107,7 @@ const Trial = () => {
                                                 </AccordionItem>
                                                 <AccordionItem value="item-2">
                                                     <AccordionTrigger>Tags</AccordionTrigger>
-                                                    <AccordionContent>
+                                                    <AccordionContent className='text-left'>
                                                         {post_data?.extra_info.tags} <Button onClick={() => navigator.clipboard.writeText(post_data?.extra_info.tags)} variant="outline" size="sm" className="p-2 ml-1">
                                                             <CopyIcon size={16} />
                                                         </Button>
@@ -124,7 +124,7 @@ const Trial = () => {
                                                 .split(/\d+\.\s/)
                                                 .filter((item: any) => item.trim() !== '')
                                                 .map((item: any, index: number) => (
-                                                    <p className='mb-2' key={index}>
+                                                    <p className='mb-2 text-left' key={index}>
                                                         {index + 1}. {item} <Button onClick={() => navigator.clipboard.writeText(item)} variant="outline" size="sm" className="p-2 ml-1">
                                                             <CopyIcon size={16} />
                                                         </Button>
@@ -132,7 +132,7 @@ const Trial = () => {
                                                 ))}
                                         </>
                                     ) : (
-                                        <p>{post_data?.body} <Button onClick={() => navigator.clipboard.writeText(post_data?.body)} variant="outline" size="sm" className="p-2 ml-1">
+                                        <p className='text-left'>{post_data?.body} <Button onClick={() => navigator.clipboard.writeText(post_data?.body)} variant="outline" size="sm" className="p-2 ml-1">
                                             <CopyIcon size={16} />
                                         </Button></p>
                                     )}
