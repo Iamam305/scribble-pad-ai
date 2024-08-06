@@ -23,9 +23,9 @@ export const Hero = () => {
       <div className="text-center lg:text-start space-y-6">
         <main className="text-5xl md:text-6xl font-bold">
           <h1 className="inline">
-            Translate Your {" "}
+            Translate Your  {" "}
             <span className="inline bg-gradient-to-r from-[#F596D3]  to-[#D247BF] text-transparent bg-clip-text">
-              Thoughts
+              Raw Thoughts
             </span>{" "}
             into Powerful
           </h1>{" "}

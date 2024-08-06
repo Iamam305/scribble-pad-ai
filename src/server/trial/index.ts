@@ -9,7 +9,7 @@ import { randomUUID } from "crypto";
 import { Hono } from "hono";
 
 export const trial_app = new Hono<{ Variables: any }>();
-trial_app.use(unauth_middleware);
+trial_app.use('/',unauth_middleware);
 
 trial_app.post("/", async (c) => {
   try {
