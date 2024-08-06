@@ -59,7 +59,36 @@ export const Hero = () => {
 
       {/* Hero cards sections */}
       <div className="z-10 w-full aspect-video">
-        <ReactPlayer url='https://www.youtube.com/watch?v=dPI-mRFEIH0' width={"100%"} height={"100%"} light />
+        <div
+          style={{
+            position: "relative",
+            boxSizing: "content-box",
+            maxHeight: "80svh",
+            width: "100%",
+            aspectRatio: "2.0310296191819464",
+            padding: "40px 0 40px 0"
+          }}
+        >
+          <iframe
+            src="https://app.supademo.com/embed/clzietttq1n699x77awwt4tep?embed_v=2"
+            loading="lazy"
+            title="Scribblepad-ai Demo"
+            allow="clipboard-write"
+            frameBorder={0}
+            // allowFullScreen="true"
+            // mozallowfullscreen="true"
+            allowFullScreen={true}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%"
+            }}
+          />
+        </div>
+
+        {/* <ReactPlayer url='https://www.youtube.com/watch?v=dPI-mRFEIH0' width={"100%"} height={"100%"} light /> */}
         {/* <HeroCards /> */}
       </div>
 
