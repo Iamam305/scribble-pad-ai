@@ -17,7 +17,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "ScribblePad AI | Translate you thoughts into structured content",
   description: "ScribblePad AI is your ultimate tool for creative writing, content generation, and AI-assisted brainstorming. Unleash your creativity with cutting-edge AI technology designed to enhance your writing process.",
-  keywords: "AI Writing, Content Generation, Creative Writing, Brainstorming Tool, AI technology, Writing Assistant, ScribblePad AI, Innovative Writing, Content Creation, Writing Tool"
+  keywords: "AI Writing, Content Generation, Creative Writing, Brainstorming Tool, AI technology, Writing Assistant, ScribblePad AI, Innovative Writing, Content Creation, Writing Tool",
+  icons: {
+    icon: "./favicon.ico",
+  }
 };
 
 export default function RootLayout({

@@ -12,14 +12,15 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
+import Logo from "../../assets/logo.svg";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { buttonVariants } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 
-import { LogoIcon } from "../home/Icons";
+// import { LogoIcon } from "../home/Icons";
 import Link from "next/link";
 import PopupForm from "../popup-form";
+import Image from "next/image";
 
 interface RouteProps {
   href: string;
@@ -55,8 +56,9 @@ export const Navbar = () => {
             <Link
               rel="noreferrer noopener"
               href="/"
-              className="ml-2 font-bold text-xl flex"
+              className="ml-2 font-bold text-xl flex items-center gap-2"
             >
+              <Image src={Logo} width={30} alt="ScribblePad AI Logo"  />
               {/* <LogoIcon /> */}
               ScribblePad AI
             </Link>

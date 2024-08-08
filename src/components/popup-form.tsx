@@ -95,7 +95,7 @@ const PopupForm = ({
                         <Label htmlFor="Message" className="text-left">
                             Message
                         </Label>
-                        <Textarea id="Message" onChange={(e) => setForm_data({ ...form_data, message: e.target.value })} value={form_data.message}  className="col-span-3" />
+                        <Textarea id="Message" onChange={(e) => setForm_data({ ...form_data, message: e.target.value })} value={form_data.message} className="col-span-3" />
                     </div>
                 </div>
                 <DialogFooter>

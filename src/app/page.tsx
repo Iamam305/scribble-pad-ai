@@ -16,7 +16,6 @@ import { Team } from "@/components/home/Team";
 import { Testimonials } from "@/components/home/Testimonials";
 import { Metadata } from "next";
 import Image from "next/image";
-import '@vidstack/react/player/styles/default/theme.css';
 
 export default function Home() {
   return (
