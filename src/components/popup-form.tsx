@@ -36,8 +36,8 @@ const PopupForm = ({
             setLoading(true)
             const res = await axios_instance.request({
                 method: "POST",
-                url: `https://formsubmit.co/ajax/${process.env.NEXT_PUBLIC_FORMSUBMIT_API_KEY}`,
-                data: { ...form_data, form_name },
+                url: `api/v1/form-submission`,
+                data: { ...form_data, form_type: form_name },
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     "Content-Type": "application/json"
