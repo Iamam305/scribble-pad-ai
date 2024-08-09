@@ -34,6 +34,23 @@ export default function RootLayout({
   }
   return (
     <html lang="en" className="dark">
+      <head>
+
+        <Script>
+          {
+            `
+          (function(h,o,t,j,a,r){
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+          h._hjSettings={hjid:5089310,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    `
+          }
+        </Script>
+      </head>
       <body className={inter.className}>
         <main>
 
@@ -52,6 +69,7 @@ export default function RootLayout({
         </Suspense>
 
         <Script src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "785d79991a9f4fe3b8a100cfe895643f"}' defer />
+
 
         {/* <Script type='text/javascript'>
           window.smartlook||(function(d) {
