@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
 
-        <Script>
+        <script>
           {
             `
           (function(h,o,t,j,a,r){
@@ -49,7 +49,7 @@ export default function RootLayout({
     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     `
           }
-        </Script>
+        </script>
       </head>
       <body className={inter.className}>
         <main>
