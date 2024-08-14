@@ -6,7 +6,7 @@ import { download_file_from_s3 } from "./download-file-from-s3";
 import { ChatAnthropic } from "@langchain/anthropic";
 import { linkedin_post_prompt } from "../prompts/linkedin-post-prompt";
 import { extract_string_between_tags } from "./extract-string-bw-tags";
-
+import { ChatGroq } from "@langchain/groq";
 export const generate_linkedin_post = async (
   transcription_file_key: string
 ): Promise<[string | null, Error | string | null]> => {
@@ -27,11 +27,21 @@ export const generate_linkedin_post = async (
       })
       .join("\n");
 
-    const llm = new ChatAnthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY!,
-      modelName: "claude-3-haiku-20240307",
-      temperature: 0.4,
-      maxTokensToSample: 4000,
+    const llm = new ChatGroq({
+      apiKey: process.env.GROQ_API_KEY,
+      model:"llama-3.1-8b-instant",
+
+    });
+    // new ChatAnthropic({
+    //   apiKey: process.env.ANTHROPIC_API_KEY!,
+    //   modelName: "claude-3-haiku-20240307",
+    //   temperature: 0.4,
+    //   maxTokensToSample: 4000,
+    // });
+    new ChatGroq({
+      apiKey: process.env.GROQ_API_KEY,
+      model:"llama-3.1-8b-instant",
+
     });
 
     const chain = linkedin_post_prompt.pipe(llm);

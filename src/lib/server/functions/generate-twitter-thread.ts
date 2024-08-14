@@ -7,6 +7,7 @@ import { ChatAnthropic } from "@langchain/anthropic";
 import { linkedin_post_prompt } from "../prompts/linkedin-post-prompt";
 import { extract_string_between_tags } from "./extract-string-bw-tags";
 import { twitter_thread_prompt } from "../prompts/twitter-thread-prompt";
+import { ChatGroq } from "@langchain/groq";
 
 export const generate_twitter_thread = async (
   transcription_file_key: string
@@ -28,11 +29,9 @@ export const generate_twitter_thread = async (
       })
       .join("\n");
 
-    const llm = new ChatAnthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY!,
-      modelName: "claude-3-haiku-20240307",
-      temperature: 0.4,
-      maxTokensToSample: 4000,
+    const llm = new ChatGroq({
+      apiKey: process.env.GROQ_API_KEY,
+      model: "llama-3.1-8b-instant",
     });
 
     const chain = twitter_thread_prompt.pipe(llm);

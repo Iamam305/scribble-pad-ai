@@ -38,8 +38,8 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
 
-       <HotjarSnippet/>
-       <SmartlookSnippet/>
+        <HotjarSnippet />
+        <SmartlookSnippet />
       </head>
       <body className={inter.className}>
         <main>

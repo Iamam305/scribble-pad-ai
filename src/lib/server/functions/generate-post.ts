@@ -3,6 +3,7 @@ import { TextLoader } from "langchain/document_loaders/fs/text";
 import { blog_post_prompt } from "../prompts/blog-post-prompt";
 import { download_file_from_s3 } from "./download-file-from-s3";
 import { PromptTemplate } from "@langchain/core/prompts";
+import { ChatGroq } from "@langchain/groq";
 export const generate_blog_post = async (
   transcription_file_key: string,
   prompt: typeof PromptTemplate
@@ -24,11 +25,9 @@ export const generate_blog_post = async (
       })
       .join("\n");
 
-    const llm = new ChatAnthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY!,
-      modelName: "claude-3-haiku-20240307",
-      temperature: 0.4,
-      maxTokensToSample: 4000,
+    const llm = new ChatGroq({
+      apiKey: process.env.GROQ_API_KEY,
+      model: "llama-3.1-8b-instant",
     });
 
     const chain = blog_post_prompt.pipe(llm);
