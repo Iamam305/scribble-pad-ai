@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import PopupForm from "../popup-form";
 
 interface FAQProps {
   question: string;
@@ -127,13 +128,11 @@ export const FAQ = () => {
 
       <h3 className="font-medium mt-4">
         Still have questions?{" "}
-        <a
-          rel="noreferrer noopener"
-          href="#"
-          className="text-primary transition-all border-primary hover:border-b-2"
-        >
-          Contact us
-        </a>
+        <PopupForm
+              form_name="Contact Us"
+              form_buttton_name="Contact Us"
+              form_description="Get in touch with us"
+            />
       </h3>
     </section>
   );

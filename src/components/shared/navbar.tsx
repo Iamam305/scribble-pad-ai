@@ -110,6 +110,11 @@ export const Navbar = () => {
 
                     Login
                   </Link>
+                  <PopupForm
+              form_name="Contact Us"
+              form_buttton_name="Contact Us"
+              form_description="Get in touch with us"
+            />
                 </nav>
               </SheetContent>
             </Sheet>
