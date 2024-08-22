@@ -42,7 +42,7 @@ export const Hero = () => {
         </main>
 
         <p className="text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0">
-          Are you bursting with brilliant ideas but struggle to organize them into compelling posts? ScribblePad AI is here to revolutionize your content creation process.
+          Record your raw thoughts in audio format and upload it to Scribblepad-ai.com and get your structured linkedin post, twitter thread or blog post in return.
         </p>
 
         <div className="flex gap-4 flex-wrap items-stretch">
