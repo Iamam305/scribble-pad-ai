@@ -7,15 +7,7 @@ import { post_app } from "./post";
 import { trial_app } from "./trial";
 import { form_submission_app } from "./form-submission";
 
-export const main = new Hono<{
-  Variables: {
-    user: {
-      email: string;
-      id: string;
-      user_name: string;
-    };
-  };
-}>();
+export const main = new Hono();
 // main.use();
 main.route("/post", post_app);
 main.route("/file-upload", file_upload_app);
